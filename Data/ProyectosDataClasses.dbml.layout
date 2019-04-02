@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ProyectosDataClasses">
+  <DataContextMoniker Name="/ProyectosDataClassesDataContext" />
+  <nestedChildShapes>
+    <classShape Id="b25851c8-f756-4ed7-a210-ce5919b301ac" absoluteBounds="3.375, 1, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ProyectosDataClassesDataContext/Customer" />
+      <nestedChildShapes>
+        <elementListCompartment Id="83cb0630-6d43-415c-8189-06057fcb3978" absoluteBounds="3.3899999999999997, 1.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="87a5a48c-5295-4efa-89b8-c2edc227146d" absoluteBounds="0.5, 1, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ProyectosDataClassesDataContext/Invoice" />
+      <nestedChildShapes>
+        <elementListCompartment Id="31bd4c8e-d837-47e6-b6e1-2de437fc9c28" absoluteBounds="0.51499999999999968, 1.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="d1ec5ac9-23a2-4dbb-bc69-6891b01680a5" absoluteBounds="0.5, 3.5, 2, 2.3478011067708335">
+      <DataClassMoniker Name="/ProyectosDataClassesDataContext/Invoie_Detail" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8507d640-096f-4209-901b-e064e91d5e0f" absoluteBounds="0.51499999999999968, 3.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.5 : 2.57859537760417); (1.5 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ProyectosDataClassesDataContext/Invoice/Invoice_Invoie_Detail" />
+      <nodes>
+        <classShapeMoniker Id="87a5a48c-5295-4efa-89b8-c2edc227146d" />
+        <classShapeMoniker Id="d1ec5ac9-23a2-4dbb-bc69-6891b01680a5" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="1f62de2e-0174-4f79-9210-b20f3001e86b" absoluteBounds="4.5, 2.75, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/ProyectosDataClassesDataContext/Item" />
+      <nestedChildShapes>
+        <elementListCompartment Id="dc99bc29-70da-4323-b78b-eb88cd43d970" absoluteBounds="4.515, 3.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6c43bc96-0762-401e-a267-1fcdc0ef8ff3" absoluteBounds="5.75, 1, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ProyectosDataClassesDataContext/Kardex_Inventory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="48e9e090-d7c9-41f9-834c-69cb8dd7a685" absoluteBounds="5.7650000000000006, 1.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

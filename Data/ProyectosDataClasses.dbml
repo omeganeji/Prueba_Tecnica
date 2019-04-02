@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Proyecto" Class="ProyectosDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-T1QKVE2\SQL;Initial Catalog=Proyecto;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="ProyectoConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Customer" Member="Customer">
+    <Type Name="Customer">
+      <Column Name="ID_Customer" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name_Customer" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="SoftDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invoice" Member="Invoice">
+    <Type Name="Invoice">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Customer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Total" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="SoftDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Invoice_Invoie_Detail" Member="Invoie_Detail" ThisKey="ID" OtherKey="ID_Invoice" Type="Invoie_Detail" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Invoie_Detail" Member="Invoie_Detail">
+    <Type Name="Invoie_Detail">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Invoice" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Item" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="Unit_Price" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="Price_Total" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="SoftDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Invoice_Invoie_Detail" Member="Invoice" ThisKey="ID_Invoice" OtherKey="ID" Type="Invoice" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Item" Member="Item">
+    <Type Name="Item">
+      <Column Name="ID_Item" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name_Item" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Inventory_Quantity" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="Unit_Price" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="SoftDelete" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kardex_Inventory" Member="Kardex_Inventory">
+    <Type Name="Kardex_Inventory">
+      <Column Name="ID_Kardex_Inventory" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ID_Item" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="Type_Inventory" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.AgregarKardex" Method="AgregarKardex">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ValidarItem" Method="ValidarItem">
+    <Parameter Name="id_Item" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Inventory_Quantity" Parameter="inventory_Quantity" Type="System.Decimal" DbType="Decimal(25,2)" />
+    <ElementType Name="ValidarItemResult">
+      <Column Name="Cost" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
