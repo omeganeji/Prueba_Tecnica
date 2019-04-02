@@ -70,3 +70,60 @@ begin
  select Cost from Item where ID_Item=@id_Item and Inventory_Quantity >= @Inventory_Quantity
 
 end
+
+INSERT INTO [dbo].[Customer]
+           ([Code]
+           ,[Name_Customer]
+           ,[SoftDelete])
+     VALUES
+           ('2'
+           ,'Cliente 2'
+           ,0)
+GO
+
+
+INSERT INTO [dbo].[Customer]
+           ([Code]
+           ,[Name_Customer]
+           ,[SoftDelete])
+     VALUES
+           ('1'
+           ,'Cliente 1'
+           ,0)
+GO
+
+
+INSERT INTO [dbo].[Item]
+           ([Code]
+           ,[Name_Item]
+           ,[Inventory_Quantity]
+           ,[Cost]
+           ,[Unit_Price]
+           ,[SoftDelete])
+     VALUES
+           ('1'
+           ,'Item 1'
+           ,100.0
+           ,100.0
+           ,200.0
+           ,0)
+GO
+
+
+INSERT INTO [dbo].[Item]
+           ([Code]
+           ,[Name_Item]
+           ,[Inventory_Quantity]
+           ,[Cost]
+           ,[Unit_Price]
+           ,[SoftDelete])
+     VALUES
+           ('2'
+           ,'Item 2'
+           ,100.0
+           ,100.0
+           ,200.0
+           ,0)
+GO
+
+
