@@ -25,7 +25,7 @@ namespace Prueba_Tecnica.Data
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="Proyecto")]
 	public partial class ProyectosDataClassesDataContext : System.Data.Linq.DataContext
 	{
-       
+		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
 		
     #region Definiciones de métodos de extensibilidad
@@ -50,14 +50,12 @@ namespace Prueba_Tecnica.Data
 		public ProyectosDataClassesDataContext() : 
 				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["ProyectoConnectionString"].ConnectionString, mappingSource)
 		{
-          
-            OnCreated();
+			OnCreated();
 		}
 		
 		public ProyectosDataClassesDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
-
 			OnCreated();
 		}
 		
@@ -131,6 +129,13 @@ namespace Prueba_Tecnica.Data
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id_Item, inventory_Quantity);
 			return ((ISingleResult<ValidarItemResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Buscar_Factura")]
+		public ISingleResult<Buscar_FacturaResult> Buscar_Factura([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id);
+			return ((ISingleResult<Buscar_FacturaResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1062,6 +1067,158 @@ namespace Prueba_Tecnica.Data
 				if ((this._Cost != value))
 				{
 					this._Cost = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Buscar_FacturaResult
+	{
+		
+		private System.Nullable<int> _ID_Customer;
+		
+		private int _ID_Documento;
+		
+		private int _ID_Detalle;
+		
+		private string _Code;
+		
+		private string _Name_Item;
+		
+		private System.Nullable<decimal> _Quantity;
+		
+		private System.Nullable<decimal> _Unit_Price;
+		
+		private System.Nullable<decimal> _Price_Total;
+		
+		public Buscar_FacturaResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Customer", DbType="Int")]
+		public System.Nullable<int> ID_Customer
+		{
+			get
+			{
+				return this._ID_Customer;
+			}
+			set
+			{
+				if ((this._ID_Customer != value))
+				{
+					this._ID_Customer = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Documento", DbType="Int NOT NULL")]
+		public int ID_Documento
+		{
+			get
+			{
+				return this._ID_Documento;
+			}
+			set
+			{
+				if ((this._ID_Documento != value))
+				{
+					this._ID_Documento = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID_Detalle", DbType="Int NOT NULL")]
+		public int ID_Detalle
+		{
+			get
+			{
+				return this._ID_Detalle;
+			}
+			set
+			{
+				if ((this._ID_Detalle != value))
+				{
+					this._ID_Detalle = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Code", DbType="VarChar(50)")]
+		public string Code
+		{
+			get
+			{
+				return this._Code;
+			}
+			set
+			{
+				if ((this._Code != value))
+				{
+					this._Code = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name_Item", DbType="VarChar(100)")]
+		public string Name_Item
+		{
+			get
+			{
+				return this._Name_Item;
+			}
+			set
+			{
+				if ((this._Name_Item != value))
+				{
+					this._Name_Item = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Decimal(25,2)")]
+		public System.Nullable<decimal> Quantity
+		{
+			get
+			{
+				return this._Quantity;
+			}
+			set
+			{
+				if ((this._Quantity != value))
+				{
+					this._Quantity = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Unit_Price", DbType="Decimal(25,2)")]
+		public System.Nullable<decimal> Unit_Price
+		{
+			get
+			{
+				return this._Unit_Price;
+			}
+			set
+			{
+				if ((this._Unit_Price != value))
+				{
+					this._Unit_Price = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Price_Total", DbType="Decimal(25,2)")]
+		public System.Nullable<decimal> Price_Total
+		{
+			get
+			{
+				return this._Price_Total;
+			}
+			set
+			{
+				if ((this._Price_Total != value))
+				{
+					this._Price_Total = value;
 				}
 			}
 		}

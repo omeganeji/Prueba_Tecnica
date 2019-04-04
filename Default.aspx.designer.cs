@@ -157,6 +157,15 @@ namespace Prueba_Tecnica {
         protected global::System.Web.UI.WebControls.Button ButtonAgregarItem;
         
         /// <summary>
+        /// Control ButtonEliminar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonEliminar;
+        
+        /// <summary>
         /// Control GridView1.
         /// </summary>
         /// <remarks>

@@ -32,5 +32,28 @@ namespace Prueba_Tecnica.Models
 
         public Boolean SoftDelete;
     }
+    public class DocumentoFactuMaster
+    {
+        public int ID_Customer;
+        public Boolean SoftDelete;
+    }
+    public class ParamUpdate
+    {
+        public int Documento;
+        public DocumentoFactuMaster Master;
+        public Invoie_Detail Detalle;
 
+
+        public Invoie_Detail Concertir_Detalle (DocumentoFactuDet DetalleFact)
+        {
+            Invoie_Detail Detalle = new Invoie_Detail(); 
+            Detalle.ID_Item = DetalleFact.ID_Item;
+            Detalle.Quantity = DetalleFact.Quantity;
+            Detalle.Unit_Price = DetalleFact.Unit_Price;
+            Detalle.Price_Total = DetalleFact.Price_Total;
+            Detalle.SoftDelete = DetalleFact.SoftDelete;
+
+            return Detalle;
+        }
+    }
 }

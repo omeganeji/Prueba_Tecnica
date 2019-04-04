@@ -71,6 +71,22 @@ begin
 
 end
 
+go
+
+Create PROCEDURE [dbo].[Buscar_Factura]
+( @id int)
+as
+begin
+
+select inv.ID_Customer ,inv.ID ID_Documento ,de.ID ID_Detalle,It.Code, It.Name_Item, de.Quantity, de.Unit_Price, de.Price_Total from Invoice inv
+inner join Customer cus on inv.ID_Customer = cus.ID_Customer 
+inner join Invoie_Detail de on de.ID_Invoice = inv.ID 
+inner join Item it on it.ID_Item = de.ID_Item where inv.ID =@id and de.SoftDelete =0 and inv.SoftDelete =0  
+order by de.id 
+
+end
+go
+
 INSERT INTO [dbo].[Customer]
            ([Code]
            ,[Name_Customer]

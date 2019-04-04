@@ -60,4 +60,17 @@
       <Column Name="Cost" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.Buscar_Factura" Method="Buscar_Factura">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Buscar_FacturaResult">
+      <Column Name="ID_Customer" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ID_Documento" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ID_Detalle" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name_Item" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="Unit_Price" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+      <Column Name="Price_Total" Type="System.Decimal" DbType="Decimal(25,2)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

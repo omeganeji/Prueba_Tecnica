@@ -31,21 +31,14 @@ namespace Prueba_Tecnica.Controllers
         }
         //Api para buscar una factura con parametro desde url con cambios en el tipo de documento que devuelve
         // GET api/values/5
-        public Documento Get(int id)
+        public List<Buscar_FacturaResult> Get(int id)
         {
             using (ProyectosDataClassesDataContext data = new ProyectosDataClassesDataContext())
             {
-                Documento InvoiceSelect = new Documento();
-                InvoiceSelect.Master  = data.Invoice.Where(inv => inv.ID == id).FirstOrDefault();
-                InvoiceSelect.Custom =  data.Customer.Where(inv => inv.ID_Customer == InvoiceSelect.Master.ID_Customer).FirstOrDefault();
+                List <Buscar_FacturaResult> InvoiceSelect = new List<Buscar_FacturaResult>();
+                InvoiceSelect = data.Buscar_Factura(id).ToList();
 
-                var Items = from de in InvoiceSelect.Master.Invoie_Detail 
-                        join It in data.Item on de.ID_Item equals It.ID_Item
-                        select It;
-
-                InvoiceSelect.Item = Items.ToList();
-                if (InvoiceSelect.Master.Invoie_Detail.Count() > 0);
-               return InvoiceSelect;
+                return InvoiceSelect;
             }
         }
 
@@ -132,14 +125,21 @@ namespace Prueba_Tecnica.Controllers
         // PUT api/values/5
 
         [Route("API/InvoiceMaster/Update")]
-        public Mensaje Put(int id, [FromBody] Invoice value)
+        public Mensaje Modificar([FromBody] ParamUpdate Update)
         {
+            Decimal total = 0;
+            bool error = false;
             Mensaje Respuesta = new Mensaje();
             using (ProyectosDataClassesDataContext data = new ProyectosDataClassesDataContext())
             {
                 try
                 {
-                    Invoice InvoiceUpdate = data.Invoice.Where(inv => inv.ID == id || inv.SoftDelete == false).FirstOrDefault();
+                    Invoice InvoiceUpdate = data.Invoice.Where(inv => inv.ID == Update.Documento || inv.SoftDelete == false).FirstOrDefault();
+
+                    InvoiceUpdate.ID_Customer = Update.Master.ID_Customer;
+                    InvoiceUpdate.SoftDelete = Update.Master.SoftDelete;
+                    InvoiceUpdate.Invoie_Detail.Add(Update.Detalle);
+                
 
                     if (InvoiceUpdate is null)
                     {
@@ -148,10 +148,45 @@ namespace Prueba_Tecnica.Controllers
                     }
                     else
                     {
-                        InvoiceUpdate = value;              
+                        foreach (Invoie_Detail Detail in InvoiceUpdate.Invoie_Detail)
+                        {
+
+                            if (Detail.ID_Item is null || data.Item.Where(cus => cus.ID_Item == Detail.ID_Item).Count() <= 0)
+                            {
+                                Respuesta.ErrorNo = "4";
+                                Respuesta.MensajeTexto = "Faltan Productos";
+                                error = true;
+                            }
+                            else
+                            {
+                                ValidarItemResult carl = data.ValidarItem(Detail.ID_Item, Detail.Quantity).FirstOrDefault();
+                                if ((carl is null))
+                                {
+                                    Respuesta.ErrorNo = "5";
+                                    Respuesta.MensajeTexto = "Producto sin existencia";
+                                    error = true;
+                                }
+                                else
+                                {
+                                    //Se podria validar o enviar un error si el precio total no es igual al precio por la cantidad
+                                    //En este caso se remplazara por el valor correcto
+                                    Detail.Cost = carl.Cost;
+                                    Detail.Price_Total = Detail.Unit_Price * Detail.Quantity;
+
+                                    total = total + (decimal)Detail.Price_Total;
+                                }
+
+                            }
+                        }
+                        //Se podria validar o enviar un error si el precio total del documento no es igual a los totales del detalle
+                        //En este caso se remplazara por el valor correcto
+                        InvoiceUpdate.Total = total;
+
+
                         data.SubmitChanges();
                         Respuesta.ErrorNo = "0";
                         Respuesta.MensajeTexto = "Factura Actualizada correctamente";
+                        Respuesta.doc = InvoiceUpdate.ID.ToString();
                     }
 
                 }
@@ -184,7 +219,7 @@ namespace Prueba_Tecnica.Controllers
                         InvoiceUpdate.SoftDelete = true;
                         data.SubmitChanges();
                         Respuesta.ErrorNo = "0";
-                        Respuesta.ErrorNo = "Factura Actualizada correctamente";                      
+                        Respuesta.ErrorNo = "Factura Eliminada correctamente";                      
                     }
                 }
                 catch (Exception e)
