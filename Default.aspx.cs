@@ -173,5 +173,37 @@ namespace Prueba_Tecnica
                 LabelInfo.Text = Doc.MensajeTexto;
             }
         }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            int index = ((System.Web.UI.WebControls.GridViewRow)((System.Web.UI.Control)sender).BindingContainer).DataItemIndex;
+            var Eliminar = GridView1.Rows[index].Cells[1].Text;
+
+            string Url = Request.Url.Authority;
+
+            string param = String.IsNullOrWhiteSpace(TextBoxDocumento.Text) ? "0" : TextBoxDocumento.Text;
+           // var client = new RestClient("http://" + Url + "/API/InvoiceMaster/EliminarDetalle?id=" + param + "");
+            var client = new RestClient("http://" + Url + "/API/InvoiceMaster/EliminarDetalle");
+        
+            var request = new RestSharp.RestRequest(Method.DELETE);
+            request.AddParameter("id", Eliminar);
+
+            var response = client.Execute<Mensaje>(request);
+
+            RestSharp.Deserializers.JsonDeserializer deserial = new JsonDeserializer();
+
+
+            Mensaje Doc = JsonConvert.DeserializeObject<Mensaje>(response.Content);
+            if (!(Doc is null))
+            {
+                LabelInfo.Text = Doc.MensajeTexto;
+                ButtonBuscar_Click(sender, e);
+            }
+            else
+            {
+                LabelInfo.Text = Doc.MensajeTexto;
+            }
+            //((System.Web.UI.WebControls.GridViewRow)((System.Web.UI.Control)sender).BindingContainer).DataItemIndex
+        }
     }
 }

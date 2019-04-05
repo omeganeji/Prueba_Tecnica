@@ -230,5 +230,35 @@ namespace Prueba_Tecnica.Controllers
             }
             return Respuesta;
         }
+        [Route("API/InvoiceMaster/EliminarDetalle")]
+        public Mensaje DeleteDetalle(int id)
+        {
+            Mensaje Respuesta = new Mensaje();
+            using (ProyectosDataClassesDataContext data = new ProyectosDataClassesDataContext())
+            {
+                try
+                {
+                    Invoie_Detail InvoiceUpdate = data.Invoie_Detail.Where(inv => inv.ID == id).FirstOrDefault();
+                    if (InvoiceUpdate is null)
+                    {
+                        Respuesta.ErrorNo = "1";
+                        Respuesta.MensajeTexto = "Factura No existe";
+                    }
+                    else
+                    {
+                        InvoiceUpdate.SoftDelete = true;
+                        data.SubmitChanges();
+                        Respuesta.ErrorNo = "0";
+                        Respuesta.ErrorNo = "Factura Eliminada correctamente";
+                    }
+                }
+                catch (Exception e)
+                {
+                    Respuesta.ErrorNo = "-1";
+                    Respuesta.ErrorNo = e.Message;
+                }
+            }
+            return Respuesta;
+        }
     }
 }

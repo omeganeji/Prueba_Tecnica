@@ -51,10 +51,18 @@
                     </div>
                 </div>
                 <div class="col-md-12 ">
-                    <asp:GridView ID="GridView1" CssClass ="table table-hover table-bordered table-condensed" runat="server" >
+                    <asp:GridView ID="GridView1"  CssClass ="table table-hover table-bordered table-condensed" runat="server" >
+                        <Columns>
+                            <asp:TemplateField HeaderText="Eliminar">
+                                 <ItemTemplate>
+                                <asp:Button runat="server" Text="Eliminar" CssClass ="btn btn-danger " OnClientClick ="return confirm('Seguro que desea eleminar?');" OnClick="Unnamed_Click"  />
+                                        </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                         
+                        </asp:GridView>
 
-
-                    </asp:GridView>
+                   
                 </div>
             </div>
         </div>
